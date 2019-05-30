@@ -14,6 +14,11 @@
         </div>
       </nav>
       {% if session['user']: %}
+      <div class="values-body">
+	{% for value in values %}
+        <p>{{value}}</p>
+	{% endfor %}
+      </div>
       {% else %}
       <div class="login-content">
 	<div class="login-header">

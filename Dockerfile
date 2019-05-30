@@ -3,7 +3,7 @@ FROM python:2.7
 ARG HTTP_PROXY
 ARG HTTPS_PROXY
 
-RUN pip install Flask
+RUN pip install Flask requests
 COPY view.py /
 COPY entrypoint.sh /
 COPY templates /templates
