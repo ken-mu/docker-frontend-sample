@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+      <title>IoT Test</title>
     </head>
     <body>
       <nav class="nav-top">
@@ -14,6 +15,13 @@
         </div>
       </nav>
       {% if session['user']: %}
+      <div class="input-body">
+        <form action="/" method="post">
+          <label>From: <input type="datetime-local" name="datetime_from" value={{datetime_from}}></input></label>
+          <label>To: <input type="datetime-local" name="datetime_to" value={{datetime_to}}></input></label>
+          <input type="submit" value="Submit">
+        </form>
+      </div>
       <div class="values-body">
 	{% for value in values %}
         <p>{{value}}</p>
