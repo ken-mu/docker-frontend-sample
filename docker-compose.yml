@@ -1,0 +1,12 @@
+version: "2"
+services:
+  frontend-sample:
+    image: 401085558392.dkr.ecr.ap-northeast-1.amazonaws.com/kenmu/frontend-sample
+    ports:
+      - "5000:5000"
+    logging:
+      driver: awslogs
+      options: 
+        awslogs-group: frontend-sample
+        awslogs-region: ${AWS_DEFAULT_REGION}
+        awslogs-stream-prefix: frontend-sample

@@ -1,0 +1,6 @@
+[
+  {
+    "name": "frontend-sample",
+    "imageUri": "401085558392.dkr.ecr.ap-northeast-1.amazonaws.com/kenmu/frontend-sample:latest"
+  }
+]
