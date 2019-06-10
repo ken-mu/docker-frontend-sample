@@ -71,5 +71,9 @@ def logout():
     session.pop('user', None)
     return app.make_response(redirect(request.referrer))
 
+@app.route("/health", methods=['GET'])
+def health():
+    return "OK"
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
