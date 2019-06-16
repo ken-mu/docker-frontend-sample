@@ -1,0 +1,12 @@
+version: 0.2
+ 
+phases:
+  install:
+    runtime-versions:
+      docker: 18
+  pre_build:
+    commands:
+      - aws eks update-kubeconfig --name ${EKS_CLUSTER_NAME}
+  build:
+    commands:
+      - kubectl apply -f stage.yml
