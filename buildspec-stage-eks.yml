@@ -8,5 +8,7 @@ phases:
     commands:
       - aws eks update-kubeconfig --name ${EKS_CLUSTER_NAME}
   build:
+  post_build:
     commands:
+      - kubectl delete -f stage.yml --grace-period=0 --force
       - kubectl apply -f stage.yml
