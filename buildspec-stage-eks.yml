@@ -10,4 +10,4 @@ phases:
   post_build:
     commands:
       - kubectl delete -f stage.yml --grace-period=0 --force
-      - kubectl apply -f stage.yml
+      - envsubnet < stage.yml | kubectl apply -f -
