@@ -7,7 +7,11 @@ phases:
   pre_build:
     commands:
       - aws eks update-kubeconfig --name ${EKS_CLUSTER_NAME}
+  build:
+    commands:
+      - echo "No build"
   post_build:
     commands:
       - kubectl delete -f stage.yml --grace-period=0 --force
+    finally:
       - envsubst < stage.yml | kubectl apply -f -
