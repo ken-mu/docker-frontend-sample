@@ -36,7 +36,6 @@ def get_measurements_url(host, clientid, datetime_from_str, datetime_to_str):
 def get_db_values(host, clientid, datetime_from="", datetime_to=""):
     try:
         url = get_measurements_url(host, clientid, datetime_from, datetime_to)
-        print url
         res = requests.get(url, timeout=3.0)
     except Exception, e:
         print e;
