@@ -7,7 +7,7 @@ phases:
   pre_build:
     commands:
       - aws eks update-kubeconfig --name ${EKS_CLUSTER_NAME}
-      - export DOCKER_IMAGE_DIGEST=$(docker pull ${DOCKER_REGISTRTY_URL}/kenmu/frontend-sample:latest | grep Digest: | sed -e "s/Digest: //g")
+      - "export DOCKER_IMAGE_DIGEST=$(docker pull ${DOCKER_REGISTRTY_URL}/kenmu/frontend-sample:latest | grep Digest: | sed -e 's/Digest: //g')"
   build:
     commands:
       - envsubst < stage.yml | kubectl apply -f -
