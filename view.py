@@ -38,7 +38,7 @@ def get_db_values(host, clientid, datetime_from="", datetime_to=""):
         url = get_measurements_url(host, clientid, datetime_from, datetime_to)
         res = requests.get(url, timeout=3.0)
     except Exception, e:
-        print e;
+        app.logger.error(e);
         res = None
     if res and res.status_code == 200:
         return 200, res.json()
