@@ -18,7 +18,7 @@ steps:
     docker build -t $(dockerId).azurecr.io/$(imageName) .
     docker login -u $(dockerId) --password $(dockerPassword) $(dockerId).azurecr.io
     export DOCKER_IMAGE_DIGEST=$(docker push $(dockerId).azurecr.io/$(imageName))
-    echo $DOCKER_IMAGE_DIGEST
+    envsubst < stage.yml > stage.yml
 - task: CopyFiles@2
   inputs:
     Contents: 'stage.yml'
