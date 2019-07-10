@@ -17,7 +17,7 @@ steps:
 - script: |
     docker build -t $(dockerId).azurecr.io/$(imageName) .
     docker login -u $(dockerId) --password $(dockerPassword) $(dockerId).azurecr.io
-    export DOCKER_IMAGE_DIGEST=$(docker push $(dockerId).azurecr.io/$(imageName) | grep sha256: | sed -e 's/sha256:([0-9a-z]+)/\1/g')
+    export DOCKER_IMAGE_DIGEST=$(docker push $(dockerId).azurecr.io/$(imageName) | grep sha256: | sed -r 's/^.*(sha256:[0-9a-z]+).*$/\1/')
     cp stage.yml stage.yml.template
     envsubst < stage.yml.template > stage.yml
 - task: CopyFiles@2
