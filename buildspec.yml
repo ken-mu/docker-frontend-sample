@@ -21,4 +21,5 @@ phases:
       - envsubst < stage.yml.template > stage.yml
 artifacts:
   files:
+    - buildspec-stage-eks.yml
     - stage.yml
