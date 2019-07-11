@@ -52,12 +52,13 @@ def index():
     values = None
     datetime_from = ""
     datetime_to = ""
-    if "datetime_from" in request.form and "datetime_to" in request.form:
-        datetime_from = request.form["datetime_from"]
-        datetime_to = request.form["datetime_to"]
-        sts, values = get_db_values(dbapi_host, "0", datetime_from, datetime_to)
-    else:
-        sts, values = get_db_values(dbapi_host, "0")
+    if "user" in session:
+        if "datetime_from" in request.form and "datetime_to" in request.form:
+            datetime_from = request.form["datetime_from"]
+            datetime_to = request.form["datetime_to"]
+            sts, values = get_db_values(dbapi_host, "0", datetime_from, datetime_to)
+        else:
+            sts, values = get_db_values(dbapi_host, "0")
     return render_template('index.html', values=values, datetime_from=datetime_from, datetime_to=datetime_to)
 
 @app.route("/login", methods=['POST'])
