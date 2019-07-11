@@ -8,13 +8,16 @@ phases:
     commands:
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
       - IMAGE_TAG=latest
+      - export DOCKER_REGISTRY_URL=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
   build:
     commands:
       - docker build -t $IMAGE_REPOSITORY_NAME .
-      - docker tag $IMAGE_REPOSITORY_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPOSITORY_NAME:$IMAGE_TAG
+      - docker tag $IMAGE_REPOSITORY_NAME:$IMAGE_TAG ${DOCKER_REGISTRY_URL}/$IMAGE_REPOSITORY_NAME:$IMAGE_TAG
   post_build:
     commands:
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPOSITORY_NAME:$IMAGE_TAG
+      - export DOCKER_IMAGE_DIGEST=$(docker push ${DOCKER_REGISTRY_URL}/$IMAGE_REPOSITORY_NAME:$IMAGE_TAG | grep sha256: | sed -r 's/^.*(sha256:[0-9a-z]+).*$/\1/')
+      - cp stage.yml stage.yml.template
+      - envsubst < stage.yml.template > stage.yml
 artifacts:
   files:
     - stage.yml
