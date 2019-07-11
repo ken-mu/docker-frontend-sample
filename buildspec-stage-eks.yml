@@ -9,4 +9,4 @@ phases:
       - aws eks update-kubeconfig --name ${EKS_CLUSTER_NAME}
   build:
     commands:
-      - sh apply.sh
+      - kubectl apply -f stage.yml
