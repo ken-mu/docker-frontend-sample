@@ -4,10 +4,8 @@ import os
 import time
 from datetime import datetime
 import calendar
-import logging
 
 app = Flask(__name__)
-logging.basicConfig(format='%(asctime)s %(name)s %(levelname)s:%(message)s')
 
 app.secret_key = "iot-test"
 
