@@ -36,7 +36,7 @@ def get_measurements_url(host, clientid, datetime_from_str, datetime_to_str):
 def get_db_values(host, clientid, datetime_from="", datetime_to=""):
     try:
         url = get_measurements_url(host, clientid, datetime_from, datetime_to)
-        res = requests.get(url, timeout=3.0)
+        res = requests.get(url, timeout=60.0)
     except Exception, e:
         app.logger.error(e);
         res = None
